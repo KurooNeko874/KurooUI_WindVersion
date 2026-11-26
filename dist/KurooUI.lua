@@ -8758,6 +8758,9 @@ end
 ap.Value=ay.Original
 end
 Callback()
+if not ap.Multi then
+as:Close()
+end
 end)
 elseif ar=="Menu"then
 if not ay.Locked then
@@ -8823,6 +8826,10 @@ RecalculateCanvasSize()
 
 function as.Open(au)
 if not ap.Locked then
+if ao.Window then
+ao.Window._OpenDropdowns=ao.Window._OpenDropdowns or{}
+ao.Window._OpenDropdowns[as]=true
+end
 ap.UIElements.Menu.Visible=true
 ap.UIElements.MenuCanvas.Visible=true
 ap.UIElements.MenuCanvas.Active=true
@@ -8846,6 +8853,9 @@ end
 
 function as.Close(au)
 ap.Opened=false
+if ao.Window and ao.Window._OpenDropdowns then
+ao.Window._OpenDropdowns[as]=nil
+end
 
 am(ap.UIElements.Menu,0.25,{
 Size=UDim2.new(1,0,0,0),
@@ -14499,6 +14509,9 @@ function aw.Open(C)
 if aw.Destroyed then
 return
 end
+if av.WindUI and av.WindUI.DropdownGui then
+av.WindUI.DropdownGui.Enabled=true
+end
 task.spawn(function()
 if aw.OnOpenCallback then
 task.spawn(function()
@@ -14664,6 +14677,15 @@ end
 function aw.Close(C)
 if aw.Destroyed then
 return
+end
+if aw._OpenDropdowns then
+for _dd in next,aw._OpenDropdowns do
+pcall(function()_dd:Close()end)
+end
+table.clear(aw._OpenDropdowns)
+end
+if av.WindUI and av.WindUI.DropdownGui then
+av.WindUI.DropdownGui.Enabled=false
 end
 
 local F={}
