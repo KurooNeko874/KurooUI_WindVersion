@@ -1,17 +1,13 @@
 --[[
-     _      ___         ____  ______
-    | | /| / (_)__  ___/ / / / /  _/
-    | |/ |/ / / _ \/ _  / /_/ // /  
-    |__/|__/_/_//_/\_,_/\____/___/
-    
-    v1.6.65  |  2026-07-01  |  Roblox UI Library for scripts
-    
-    To view the source code, see the `src/` folder on the official GitHub repository.
-    
-    Author: Footagesus (Footages, .ftgs, oftgs)
-    Github: https://github.com/Footagesus/WindUI
-    Discord: https://discord.gg/ftgs-development-hub-1300692552005189632
-    License: MIT
+     __ __                     __  ______
+    / //_/__  ___________  ___/ / / /  _/
+   / ,< / / / / ___/ __ \/ __ \/ / / // /
+  / /| / /_/ / /  / /_/ / /_/ / /_/ // /
+ /_/ |_\__,_/_/   \____/\____/\____/___/
+
+    KurooUI â€” WindVersion (Persona 5 Edition)
+    Based on WindUI v1.6.65 by Footagesus (MIT License)
+    Modified by: Kuroo (https://github.com/KurooNeko874/KurooUI_WindVersion)
 ]]
 
 type ConfigType__DARKLUA_TYPE_a={
@@ -251,7 +247,8 @@ return d end function a.b()
 
 local b=(cloneref or clonereference or function(b)return b end)
 
-local d=b(game:GetService"ReplicatedStorage":WaitForChild("GetIcons",99999):InvokeServer())
+local _gi=game:GetService"ReplicatedStorage":FindFirstChild"GetIcons"
+local d=_gi and b(_gi:InvokeServer())or{Icons={lucide={Icons={},Spritesheets={}}},IconsType="lucide"}
 
 local function parseIconString(e)
 if type(e)=="string"then
@@ -352,7 +349,10 @@ p[m],
 {ImageRectSize=Vector2.new(0,0),ImageRectPosition=Vector2.new(0,0)}
 }or p[m]
 end
+if type(f)=="string"and(string.find(f,"rbxassetid://")or string.find(f,"^https?://"))then
 return nil
+end
+return h and{"",{ImageRectSize=Vector2.new(0,0),ImageRectPosition=Vector2.new(0,0)}}or""
 end
 
 function d.GetIcon(f,g)
@@ -4010,6 +4010,71 @@ end
 return aa end function a.v()
 return function(aa,ab)
 return{
+Persona5={
+Name="Persona5",
+
+Accent=Color3.fromHex"#E60012",
+Dialog=Color3.fromHex"#111115",
+Outline=Color3.fromHex"#E60012",
+Text=Color3.fromHex"#FFFFFF",
+Placeholder=Color3.fromHex"#B0B0B8",
+Background=Color3.fromHex"#09090B",
+Button=Color3.fromHex"#E60012",
+Icon=Color3.fromHex"#FFFFFF",
+Toggle=Color3.fromHex"#E60012",
+ToggleBar=Color3.fromHex"#FFFFFF",
+Slider=Color3.fromHex"#E60012",
+SliderThumb=Color3.fromHex"#FFFFFF",
+SliderIcon=Color3.fromHex"#FFFFFF",
+Checkbox=Color3.fromHex"#E60012",
+CheckboxIcon=Color3.fromHex"#FFFFFF",
+CheckboxBorder=Color3.fromHex"#E60012",
+CheckboxBorderTransparency=0.1,
+Primary=Color3.fromHex"#E60012",
+
+WindowBackground=Color3.fromHex"#09090B",
+WindowTopbarTitle=Color3.fromHex"#FFFFFF",
+WindowTopbarAuthor=Color3.fromHex"#FF3B4A",
+WindowTopbarIcon=Color3.fromHex"#E60012",
+WindowTopbarButtonIcon=Color3.fromHex"#FFFFFF",
+
+PanelBackground=Color3.fromHex"#111115",
+PanelBackgroundTransparency=0.32,
+
+TabBackground=Color3.fromHex"#16161B",
+TabBackgroundHover=Color3.fromHex"#E60012",
+TabBackgroundHoverTransparency=0.78,
+TabBackgroundActive=Color3.fromHex"#E60012",
+TabBackgroundActiveTransparency=0.12,
+TabText=Color3.fromHex"#FFFFFF",
+TabTextTransparency=0.25,
+TabTextTransparencyActive=0,
+TabIcon=Color3.fromHex"#FFFFFF",
+TabIconTransparency=0.3,
+TabIconTransparencyActive=0,
+TabBorder=Color3.fromHex"#FF2A3A",
+TabBorderTransparency=1,
+TabBorderTransparencyActive=0.05,
+
+ElementBackground=Color3.fromHex"#16161B",
+ElementBackgroundTransparency=0.08,
+ElementTitle=Color3.fromHex"#FFFFFF",
+ElementDesc=Color3.fromHex"#BDBDC7",
+ElementIcon=Color3.fromHex"#E60012",
+
+SectionBoxBorder=Color3.fromHex"#E60012",
+SectionBoxBorderTransparency=0.45,
+SearchBarBorder=Color3.fromHex"#E60012",
+SearchBarBorderTransparency=0.35,
+NotificationBorder=Color3.fromHex"#E60012",
+NotificationBorderTransparency=0.1,
+DropdownTabBorder=Color3.fromHex"#E60012",
+DropdownBackground=Color3.fromHex"#0D0D11",
+
+LabelBackground=Color3.fromHex"#141419",
+LabelBackgroundTransparency=0.1,
+},
+
 Dark={
 Name="Dark",
 
@@ -5197,175 +5262,116 @@ Button=nil
 
 local ah
 
-
-
-
-
-
-
-
-
-
-
-
-
-local ai=ac("TextLabel",{
-Text=af.Title,
-TextSize=17,
-FontFace=Font.new(ab.Font,Enum.FontWeight.Medium),
-BackgroundTransparency=1,
-AutomaticSize="XY",
-})
-
-local aj=ac("Frame",{
-Size=UDim2.new(0,36,0,36),
-BackgroundTransparency=1,
-Name="Drag",
-},{
-ac("ImageLabel",{
-Image=ab.Icon"move"[1],
-ImageRectOffset=ab.Icon"move"[2].ImageRectPosition,
-ImageRectSize=ab.Icon"move"[2].ImageRectSize,
-Size=UDim2.new(0,18,0,18),
-BackgroundTransparency=1,
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-ThemeTag={
-ImageColor3="Icon",
-},
-ImageTransparency=.3,
-})
-})
-local ak=ac("Frame",{
-Size=UDim2.new(0,1,1,0),
-Position=UDim2.new(0,36,0.5,0),
-AnchorPoint=Vector2.new(0,0.5),
-BackgroundColor3=Color3.new(1,1,1),
-BackgroundTransparency=.9,
-})
-
 local al=ac("Frame",{
-Size=UDim2.new(0,0,0,0),
-Position=UDim2.new(0.5,0,0,28),
-AnchorPoint=Vector2.new(0.5,0.5),
+Size=UDim2.new(0,50,0,50),
+Position=UDim2.new(0,24,0.5,0),
+AnchorPoint=Vector2.new(0,0.5),
 Parent=af.Parent,
 BackgroundTransparency=1,
 Active=true,
 Visible=false,
 })
 
-
 local am=ac("UIScale",{
 Scale=1,
 })
 
+local _fallbackK=ac("TextLabel",{
+Name="FallbackBadge",
+Size=UDim2.new(1,0,1,0),
+BackgroundTransparency=1,
+Text="K",
+TextSize=22,
+FontFace=Font.new(ab.Font,Enum.FontWeight.Bold),
+TextColor3=Color3.fromHex"#FFFFFF",
+ZIndex=101,
+})
+
 local an=ac("Frame",{
-Size=UDim2.new(0,0,0,44),
-AutomaticSize="X",
+Size=UDim2.new(0,50,0,50),
 Parent=al,
 Active=false,
-BackgroundTransparency=.25,
+BackgroundTransparency=0.06,
 ZIndex=99,
-BackgroundColor3=Color3.new(0,0,0),
+BackgroundColor3=Color3.fromHex"#0D0D11",
 },{
 am,
 ac("UICorner",{
 CornerRadius=UDim.new(1,0)
 }),
 ac("UIStroke",{
-Thickness=1,
+Thickness=2,
 ApplyStrokeMode="Border",
 Color=Color3.new(1,1,1),
 Transparency=0,
 },{
 ac("UIGradient",{
-Color=ColorSequence.new(Color3.fromHex"40c9ff",Color3.fromHex"e81cff")
+Color=ColorSequence.new(Color3.fromHex"E60012",Color3.fromHex"FF2A3A")
 })
 }),
-aj,
-ak,
-
-ac("UIListLayout",{
-Padding=UDim.new(0,4),
-FillDirection="Horizontal",
-VerticalAlignment="Center",
-}),
-
 ac("TextButton",{
-AutomaticSize="XY",
+Name="TextButton",
 Active=true,
 BackgroundTransparency=1,
-Size=UDim2.new(0,0,0,36),
-
-BackgroundColor3=Color3.new(1,1,1),
+Size=UDim2.new(1,0,1,0),
+BackgroundColor3=Color3.fromHex"#E60012",
+Text="",
+ZIndex=100,
 },{
 ac("UICorner",{
-CornerRadius=UDim.new(1,-4)
+CornerRadius=UDim.new(1,0)
 }),
-ah,
-ac("UIListLayout",{
-Padding=UDim.new(0,af.UIPadding),
-FillDirection="Horizontal",
-VerticalAlignment="Center",
+_fallbackK,
 }),
-ai,
-ac("UIPadding",{
-PaddingLeft=UDim.new(0,11),
-PaddingRight=UDim.new(0,11),
-}),
-}),
-ac("UIPadding",{
-PaddingLeft=UDim.new(0,4),
-PaddingRight=UDim.new(0,4),
-})
 })
 
 ag.Button=an
 
-
-
 function ag.SetIcon(ao,ap)
 if ah then
 ah:Destroy()
+ah=nil
 end
-if ap then
+if ap and ap~=""then
 ah=ab.Image(
 ap,
 af.Title,
-0,
+999,
 af.Folder,
 "OpenButton",
 true,
-af.IconThemed
+false
 )
-ah.Size=UDim2.new(0,22,0,22)
-ah.LayoutOrder=-1
+ah.Size=UDim2.new(1,0,1,0)
+ah.Position=UDim2.new(0.5,0,0.5,0)
+ah.AnchorPoint=Vector2.new(0.5,0.5)
+ah.ZIndex=101
+if ah:FindFirstChild"ImageLabel"then
+local _ic=Instance.new"UICorner"
+_ic.CornerRadius=UDim.new(1,0)
+_ic.Parent=ah.ImageLabel
+end
 ah.Parent=ag.Button.TextButton
+_fallbackK.Visible=false
+else
+_fallbackK.Visible=true
 end
 end
 
-if af.Icon then
+if af.Icon and af.Icon~=""then
 ag:SetIcon(af.Icon)
 end
 
-
-
-ab.AddSignal(an:GetPropertyChangedSignal"AbsoluteSize",function()
-al.Size=UDim2.new(
-0,an.AbsoluteSize.X,
-0,an.AbsoluteSize.Y
-)
-end)
-
 ab.AddSignal(an.TextButton.MouseEnter,function()
-ad(an.TextButton,.1,{BackgroundTransparency=.93}):Play()
+ad(am,0.12,{Scale=1.08}):Play()
+ad(an.TextButton,0.12,{BackgroundTransparency=0.82}):Play()
 end)
 ab.AddSignal(an.TextButton.MouseLeave,function()
-ad(an.TextButton,.1,{BackgroundTransparency=1}):Play()
+ad(am,0.12,{Scale=1}):Play()
+ad(an.TextButton,0.12,{BackgroundTransparency=1}):Play()
 end)
 
 local ao=ab.Drag(al)
-
 
 function ag.Visible(ap,aq)
 al.Visible=aq
@@ -5377,67 +5383,27 @@ end
 
 function ag.Edit(ap,aq)
 local ar={
-Title=aq.Title,
 Icon=aq.Icon,
 Enabled=aq.Enabled,
 Position=aq.Position,
-OnlyIcon=aq.OnlyIcon or false,
-Draggable=aq.Draggable or nil,
-OnlyMobile=aq.OnlyMobile,
+Draggable=aq.Draggable,
 CornerRadius=aq.CornerRadius or UDim.new(1,0),
 StrokeThickness=aq.StrokeThickness or 2,
 Scale=aq.Scale or 1,
 Color=aq.Color
-or ColorSequence.new(Color3.fromHex"40c9ff",Color3.fromHex"e81cff"),
+or ColorSequence.new(Color3.fromHex"E60012",Color3.fromHex"FF2A3A"),
 }
-
-
 
 if ar.Enabled==false then
 af.IsOpenButtonEnabled=false
 end
 
-if ar.OnlyMobile~=false then
-ar.OnlyMobile=true
-else
-af.IsPC=false
-end
-
-
-if ar.Draggable==false and aj and ak then
-aj.Visible=ar.Draggable
-ak.Visible=ar.Draggable
-
-if ao then
-ao:Set(ar.Draggable)
-end
+if ar.Draggable==false and ao then
+ao:Set(false)
 end
 
 if ar.Position and al then
 al.Position=ar.Position
-end
-
-if ar.OnlyIcon==true and ai then
-ai.Visible=false
-an.TextButton.UIPadding.PaddingLeft=UDim.new(0,7)
-an.TextButton.UIPadding.PaddingRight=UDim.new(0,7)
-elseif ar.OnlyIcon==false then
-ai.Visible=true
-an.TextButton.UIPadding.PaddingLeft=UDim.new(0,11)
-an.TextButton.UIPadding.PaddingRight=UDim.new(0,11)
-end
-
-
-
-
-
-if ai then
-if ar.Title then
-ai.Text=ar.Title
-ab:ChangeTranslationKey(ai,ar.Title)
-elseif ar.Title==nil then
-
-end
 end
 
 if ar.Icon then
@@ -5445,12 +5411,8 @@ ag:SetIcon(ar.Icon)
 end
 
 an.UIStroke.UIGradient.Color=ar.Color
-if Glow then
-Glow.UIGradient.Color=ar.Color
-end
-
 an.UICorner.CornerRadius=ar.CornerRadius
-an.TextButton.UICorner.CornerRadius=UDim.new(ar.CornerRadius.Scale,ar.CornerRadius.Offset-4)
+an.TextButton.UICorner.CornerRadius=ar.CornerRadius
 an.UIStroke.Thickness=ar.StrokeThickness
 
 ag:SetScale(ar.Scale)
@@ -5458,9 +5420,6 @@ end
 
 return ag
 end
-
-
-
 return aa end function a.B()
 local aa={}
 
@@ -5987,7 +5946,7 @@ ImageTransparency=1,
 Visible=false,
 Active=false,
 ThemeTag={
-ImageColor3="Text",
+ImageColor3="Outline",
 },
 Parent=au,
 },{
@@ -6049,16 +6008,14 @@ Padding=UDim.new(0,8),
 local d,f=ac(ah.UICorner,"Squircle",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
-ImageTransparency=ah.Color and 0.05 or(not ag.Window.NewElements and 0.93 or nil),
+ImageTransparency=ah.Color and 0.05 or nil,
 
 
 
 Parent=ag.Parent,
 ThemeTag={
-ImageColor3=not ah.Color and(ag.Window.NewElements and"ElementBackground"or"Text")or nil,
-ImageTransparency=not ah.Color
-and(ag.Window.NewElements and"ElementBackgroundTransparency"or nil)
-or nil,
+ImageColor3=not ah.Color and"ElementBackground"or nil,
+ImageTransparency=not ah.Color and"ElementBackgroundTransparency"or nil,
 },
 ImageColor3=ah.Color and(typeof(ah.Color)=="string"and Color3.fromHex(
 aa.Colors[ah.Color]
@@ -6066,6 +6023,26 @@ aa.Colors[ah.Color]
 },{
 ah.UIElements.Container,
 au,
+ab("Frame",{
+Name="CardBorder",
+Size=UDim2.new(1,ah.UIPadding*2,1,ah.UIPadding*2),
+Position=UDim2.new(0.5,0,0.5,0),
+AnchorPoint=Vector2.new(0.5,0.5),
+BackgroundTransparency=1,
+ZIndex=90,
+},{
+ab("UICorner",{
+CornerRadius=UDim.new(0,ah.UICorner),
+}),
+ab("UIStroke",{
+Thickness=1,
+Transparency=0.65,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
+}),
 ab("UIPadding",{
 PaddingTop=UDim.new(0,ah.UIPadding),
 PaddingLeft=UDim.new(0,ah.UIPadding),
@@ -7281,8 +7258,8 @@ Tags=ak.Tags,
 }
 
 al.UIElements.SliderIcon=ae.NewRoundFrame(99,"Squircle",{
-ImageTransparency=0.95,
-Size=UDim2.new(1,not al.IsTextbox and-aw or(-al.TextBoxWidth-8),0,4),
+ImageTransparency=0.72,
+Size=UDim2.new(1,not al.IsTextbox and-aw or(-al.TextBoxWidth-8),0,6),
 AnchorPoint=Vector2.new(0.5,0.5),
 Position=UDim2.new(0.5,0,0.5,0),
 Name="Frame",
@@ -7293,7 +7270,7 @@ ImageColor3="Text",
 ae.NewRoundFrame(99,"Squircle",{
 Name="Frame",
 Size=UDim2.new(ar,0,1,0),
-ImageTransparency=0.1,
+ImageTransparency=0,
 ThemeTag={
 ImageColor3="Slider",
 },
@@ -7301,9 +7278,9 @@ ImageColor3="Slider",
 ae.NewRoundFrame(99,"Squircle",{
 Size=UDim2.new(
 0,
-ak.Window.NewElements and(al.ThumbSize*2)or(al.ThumbSize+2),
+ak.Window.NewElements and(al.ThumbSize*2)or(al.ThumbSize+3),
 0,
-ak.Window.NewElements and(al.ThumbSize+4)or(al.ThumbSize+2)
+ak.Window.NewElements and(al.ThumbSize+4)or(al.ThumbSize+3)
 ),
 Position=UDim2.new(1,0,0.5,0),
 AnchorPoint=Vector2.new(0.5,0.5),
@@ -7312,6 +7289,16 @@ ImageColor3="SliderThumb",
 },
 Name="Thumb",
 },{
+af("UICorner",{
+CornerRadius=UDim.new(1,0),
+}),
+af("UIStroke",{
+Thickness=2,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Slider",
+},
+}),
 ae.NewRoundFrame(999,"SquircleGlass",{
 Size=UDim2.new(1,0,1,0),
 ImageColor3=Color3.new(1,1,1),
@@ -12190,6 +12177,9 @@ end
 
 function ao.SelectTab(ap,aq)
 if not ao.Tabs[aq].Locked then
+if Window._CloseSettingsPage then
+Window:_CloseSettingsPage()
+end
 ao.SelectedTab=aq
 
 for ar,as in next,ao.Tabs do
@@ -12993,6 +12983,34 @@ local ai=aa(game:GetService"RunService")
 local ak=aa(game:GetService"Players")
 
 local al=workspace.CurrentCamera
+local _http=aa(game:GetService"HttpService")
+
+local _env=(getgenv and getgenv())or _G
+local _settingsPath="KurooUI/settings.json"
+local function LoadKurooSettings()
+if type(_env.__KurooUI_Settings)=="table"then
+return _env.__KurooUI_Settings
+end
+local s={ToggleKey="K",ShowOpenIconOnPC=true}
+if not ai:IsStudio()and isfile and readfile and isfile(_settingsPath)then
+local ok,dec=pcall(function()return _http:JSONDecode(readfile(_settingsPath))end)
+if ok and type(dec)=="table"then
+if type(dec.ToggleKey)=="string"then s.ToggleKey=dec.ToggleKey end
+if type(dec.ShowOpenIconOnPC)=="boolean"then s.ShowOpenIconOnPC=dec.ShowOpenIconOnPC end
+end
+end
+_env.__KurooUI_Settings=s
+return s
+end
+local function SaveKurooSettings(s)
+_env.__KurooUI_Settings=s
+if not ai:IsStudio()and writefile then
+pcall(function()
+if isfolder and makefolder and not isfolder"KurooUI"then makefolder"KurooUI"end
+writefile(_settingsPath,_http:JSONEncode(s))
+end)
+end
+end
 
 local am=a.load't'
 
@@ -13011,6 +13029,13 @@ local au=a.load'z'
 
 
 return function(av)
+local _kSettings=LoadKurooSettings()
+local _savedKey=Enum.KeyCode[_kSettings.ToggleKey or"K"]or Enum.KeyCode.K
+local _isMobile=af.TouchEnabled and not af.KeyboardEnabled
+local _userCfg=av.User or{}
+if _userCfg.Enabled==nil then
+_userCfg.Enabled=true
+end
 local aw={
 Title=av.Title or"UI Library",
 Author=av.Author,
@@ -13020,10 +13045,10 @@ IconThemed=av.IconThemed,
 IconRadius=av.IconRadius or 0,
 Folder=av.Folder,
 Resizable=av.Resizable~=false,
-Background=av.Background,
+Background=(av.Background==nil)and(av.WindUI and av.WindUI.DefaultBackground or nil)or(av.Background or nil),
 BackgroundImageTransparency=av.BackgroundImageTransparency or 0,
 ShadowTransparency=av.ShadowTransparency or 0.6,
-User=av.User or{},
+User=_userCfg,
 Footer=av.Footer or{},
 Topbar=av.Topbar or{Height=52,ButtonsType="Default"},
 
@@ -13034,9 +13059,10 @@ MaxSize=av.MaxSize or Vector2.new(850,560),
 
 TopBarButtonIconSize=av.TopBarButtonIconSize,
 
-ToggleKey=av.ToggleKey,
-ElementsRadius=av.ElementsRadius,
-Radius=av.Radius or 16,
+ToggleKey=av.ToggleKey or _savedKey,
+ElementsRadius=av.ElementsRadius or 8,
+Radius=av.Radius or 10,
+BackgroundOverlayTransparency=av.BackgroundOverlayTransparency or 0.55,
 Transparent=av.Transparent or false,
 HideSearchBar=av.HideSearchBar~=false,
 ScrollBarEnabled=av.ScrollBarEnabled or false,
@@ -13046,7 +13072,11 @@ NewElements=av.NewElements or false,
 IgnoreAlerts=av.IgnoreAlerts or false,
 HidePanelBackground=av.HidePanelBackground or false,
 AutoScale=av.AutoScale~=false,
-OpenButton=av.OpenButton,
+OpenButton=av.OpenButton or{
+Title=av.Title or"KurooUI",
+Icon=av.WindUI and av.WindUI.DefaultOpenIcon or"",
+Enabled=true,
+},
 DragFrameSize=160,
 
 Position=UDim2.new(0.5,0,0.5,0),
@@ -13060,6 +13090,8 @@ Destroyed=false,
 IsFullscreen=false,
 CanResize=av.Resizable~=false,
 IsOpenButtonEnabled=true,
+ShowOpenIconOnPC=_kSettings.ShowOpenIconOnPC,
+IsMobile=_isMobile,
 
 CurrentConfig=nil,
 ConfigManager=nil,
@@ -13071,7 +13103,11 @@ OnOpenCallback=nil,
 OnCloseCallback=nil,
 OnDestroyCallback=nil,
 
-IsPC=false,
+IsPC=not _isMobile,
+_UserConnections={},
+_UnloadCallbacks={},
+_Unloaded=false,
+_IsBindingToggleKey=false,
 
 Gap=5,
 
@@ -13107,11 +13143,11 @@ aw.Topbar={Height=52,ButtonsType="Default"}
 end
 
 if not ai:IsStudio()and aw.Folder and writefile then
-if not isfolder("WindUI/"..aw.Folder)then
-makefolder("WindUI/"..aw.Folder)
+if not isfolder("KurooUI/"..aw.Folder)then
+makefolder("KurooUI/"..aw.Folder)
 end
-if not isfolder("WindUI/"..aw.Folder.."/assets")then
-makefolder("WindUI/"..aw.Folder.."/assets")
+if not isfolder("KurooUI/"..aw.Folder.."/assets")then
+makefolder("KurooUI/"..aw.Folder.."/assets")
 end
 if not isfolder(aw.Folder)then
 makefolder(aw.Folder)
@@ -13279,6 +13315,18 @@ ImageTransparency="PanelBackgroundTransparency",
 ZIndex=3,
 Name="Background",
 Visible=not aw.HidePanelBackground,
+},{
+ao("UICorner",{
+CornerRadius=UDim.new(0,math.max(4,aw.UICorner-(aw.UIPadding/2))),
+}),
+ao("UIStroke",{
+Thickness=1,
+Transparency=0.5,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
 }),
 ao("UIPadding",{
 
@@ -13366,73 +13414,129 @@ NumberSequenceKeypoint.new(1.0,0.1),
 an.NewRoundFrame(aw.UICorner-(aw.UIPadding/2),"Squircle",{
 Size=UDim2.new(1,0,1,0),
 ThemeTag={
-ImageColor3="Text",
+ImageColor3="ElementBackground",
 },
-ImageTransparency=1,
+ImageTransparency=0.08,
 Name="UserIcon",
 },{
+ao("UICorner",{
+CornerRadius=UDim.new(0,math.max(6,aw.UICorner-2)),
+}),
+ao("UIStroke",{
+Thickness=1,
+Transparency=0.45,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
 ao("ImageLabel",{
 Image=GetUserThumb(),
-BackgroundTransparency=1,
-Size=UDim2.new(0,42,0,42),
+BackgroundTransparency=0.85,
+Size=UDim2.new(0,36,0,36),
+Position=UDim2.new(0,8,0.5,0),
+AnchorPoint=Vector2.new(0,0.5),
 ThemeTag={
-BackgroundColor3="Text",
+BackgroundColor3="ElementBackground",
 },
-BackgroundTransparency=0.93,
 },{
 ao("UICorner",{
 CornerRadius=UDim.new(1,0),
 }),
+ao("UIStroke",{
+Thickness=1.5,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
 }),
 ao("Frame",{
-AutomaticSize="XY",
+Size=UDim2.new(1,aw.IsMobile and-54 or-84,1,0),
+Position=UDim2.new(0,52,0,0),
 BackgroundTransparency=1,
+Name="Frame",
 },{
 ao("TextLabel",{
 Text=aw.User.Anonymous and"Anonymous"or ak.LocalPlayer.DisplayName,
-TextSize=17,
+TextSize=14,
 ThemeTag={
 TextColor3="Text",
 },
 FontFace=Font.new(an.Font,Enum.FontWeight.SemiBold),
 AutomaticSize="Y",
 BackgroundTransparency=1,
-Size=UDim2.new(1,-27,0,0),
+Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 TextXAlignment="Left",
 Name="DisplayName",
 }),
 ao("TextLabel",{
-Text=aw.User.Anonymous and"anonymous"or ak.LocalPlayer.Name,
-TextSize=15,
-TextTransparency=0.6,
+Text=aw.User.Anonymous and"@anonymous"or("@"..ak.LocalPlayer.Name),
+TextSize=12,
+TextTransparency=0.4,
 ThemeTag={
 TextColor3="Text",
 },
 FontFace=Font.new(an.Font,Enum.FontWeight.Medium),
 AutomaticSize="Y",
 BackgroundTransparency=1,
-Size=UDim2.new(1,-27,0,0),
+Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 TextXAlignment="Left",
 Name="UserName",
 }),
 ao("UIListLayout",{
-Padding=UDim.new(0,4),
+Padding=UDim.new(0,2),
 HorizontalAlignment="Left",
-}),
-}),
-ao("UIListLayout",{
-Padding=UDim.new(0,aw.UIPadding),
-FillDirection="Horizontal",
 VerticalAlignment="Center",
 }),
-ao("UIPadding",{
-PaddingLeft=UDim.new(0,aw.UIPadding/2),
-PaddingRight=UDim.new(0,aw.UIPadding/2),
 }),
+not aw.IsMobile and ao("TextButton",{
+Name="SettingsGear",
+Size=UDim2.new(0,28,0,28),
+Position=UDim2.new(1,-8,0.5,0),
+AnchorPoint=Vector2.new(1,0.5),
+BackgroundColor3=Color3.fromHex"#1C1C22",
+BackgroundTransparency=0.1,
+Text="âš™",
+TextSize=16,
+TextColor3=Color3.fromHex"#FFFFFF",
+FontFace=Font.new(an.Font,Enum.FontWeight.Bold),
+AutoButtonColor=false,
+ZIndex=10,
+},{
+ao("UICorner",{
+CornerRadius=UDim.new(0,6),
+}),
+ao("UIStroke",{
+Thickness=1,
+Transparency=0.35,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
+})or nil,
 }),
 })
+
+if not aw.IsMobile then
+local _gearBtn=d.UserIcon:FindFirstChild"SettingsGear"
+if _gearBtn then
+an.AddSignal(_gearBtn.MouseEnter,function()
+ap(_gearBtn,0.12,{BackgroundColor3=Color3.fromHex"#E60012"}):Play()
+end)
+an.AddSignal(_gearBtn.MouseLeave,function()
+ap(_gearBtn,0.12,{BackgroundColor3=Color3.fromHex"#1C1C22"}):Play()
+end)
+an.AddSignal(_gearBtn.MouseButton1Click,function()
+if aw._ToggleSettingsPopup then
+aw:_ToggleSettingsPopup()
+end
+end)
+end
+end
 
 function aw.User.Enable(f)
 aw.User.Enabled=true
@@ -13718,6 +13822,17 @@ ImageColor3="WindowBackground",
 
 },{
 i,
+i and ao("Frame",{
+Name="BackgroundOverlay",
+Size=UDim2.new(1,0,1,0),
+BackgroundColor3=Color3.fromHex"#09090B",
+BackgroundTransparency=aw.BackgroundOverlayTransparency,
+ZIndex=2,
+},{
+ao("UICorner",{
+CornerRadius=UDim.new(0,aw.UICorner),
+}),
+})or nil,
 r,
 az,
 }),
@@ -13738,6 +13853,34 @@ ZIndex=97,
 },{
 ao("UICorner",{
 CornerRadius=UDim.new(0,aw.UICorner),
+}),
+ao("Frame",{
+Name="WindowBorder",
+Size=UDim2.new(1,0,1,0),
+BackgroundTransparency=1,
+ZIndex=100,
+},{
+ao("UICorner",{
+CornerRadius=UDim.new(0,aw.UICorner),
+}),
+ao("UIStroke",{
+Thickness=2,
+Transparency=0,
+ApplyStrokeMode="Border",
+ThemeTag={
+Color="Outline",
+},
+}),
+}),
+ao("Frame",{
+Name="TopbarAccentLine",
+Size=UDim2.new(1,0,0,2),
+Position=UDim2.new(0,0,0,aw.Topbar.Height-1),
+BorderSizePixel=0,
+ZIndex=98,
+ThemeTag={
+BackgroundColor3="Outline",
+},
 }),
 aw.UIElements.SideBarContainer,
 aw.UIElements.MainBar,
@@ -14137,6 +14280,10 @@ end)
 
 function aw.SetToggleKey(A,B)
 aw.ToggleKey=B
+if typeof(B)=="EnumItem"then
+_kSettings.ToggleKey=B.Name
+SaveKurooSettings(_kSettings)
+end
 end
 
 function aw.SetTitle(A,B)
@@ -14240,33 +14387,37 @@ SetSize()
 end
 end)
 
-aw:CreateTopbarButton("Minimize","minus",function()
-if aw.Close then
-aw:Close()
+local _unloadConfirmOpen=false
+aw:CreateTopbarButton("Unload","power",function()
+if not _unloadConfirmOpen then
+if not aw.IgnoreAlerts then
+_unloadConfirmOpen=true
+aw:Dialog{
+Title="Unload KurooUI",
+Content="Matikan semua fitur aktif dan hapus UI dari layar? Kamu bisa execute ulang kapan saja.",
+Buttons={
+{
+Title="Batal",
+Callback=function()
+_unloadConfirmOpen=false
+end,
+Variant="Secondary",
+},
+{
+Title="Unload UI",
+Callback=function()
+_unloadConfirmOpen=false
+aw:Unload(false)
+end,
+Variant="Primary",
+},
+},
+}
+else
+aw:Unload(false)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-end,(aw.Topbar.ButtonsType=="Default"and 997 or 998),nil,Color3.fromHex"#F4C948")
+end
+end,(aw.Topbar.ButtonsType=="Default"and 997 or 998),nil,Color3.fromHex"#E60012")
 
 function aw.OnOpen(C,F)
 aw.OnOpenCallback=F
@@ -14394,6 +14545,75 @@ av.WindUI:ToggleAcrylic(true)
 
 end)
 end
+
+local function RunKurooCleanup()
+if aw._Unloaded then
+return
+end
+aw._Unloaded=true
+
+for _,el in next,aw.AllElements do
+if type(el)=="table"and el.__type=="Toggle"and el.Value==true and type(el.Set)=="function"then
+pcall(function()
+el:Set(false)
+end)
+end
+end
+
+for _,conn in ipairs(aw._UserConnections)do
+pcall(function()
+if typeof(conn)=="RBXScriptConnection"and conn.Connected then
+conn:Disconnect()
+elseif type(conn)=="table"and conn.Disconnect then
+conn:Disconnect()
+end
+end)
+end
+table.clear(aw._UserConnections)
+
+for _,fn in ipairs(aw._UnloadCallbacks)do
+pcall(fn)
+end
+table.clear(aw._UnloadCallbacks)
+
+if _env.__KurooUI_ActiveInstance==aw then
+_env.__KurooUI_ActiveInstance=nil
+end
+end
+
+function aw.AddConnection(G,H)
+if H then
+table.insert(aw._UserConnections,H)
+end
+return H
+end
+
+function aw.OnUnload(G,H)
+if type(H)=="function"then
+table.insert(aw._UnloadCallbacks,H)
+end
+end
+
+function aw.Unload(G,instant)
+RunKurooCleanup()
+if instant then
+aw.Destroyed=true
+if aw.OnDestroyCallback then
+pcall(function()an.SafeCallback(aw.OnDestroyCallback)end)
+end
+if aw.AcrylicPaint and aw.AcrylicPaint.Model then
+pcall(function()aw.AcrylicPaint.Model:Destroy()end)
+end
+pcall(function()av.WindUI.ScreenGui:Destroy()end)
+pcall(function()av.WindUI.NotificationGui:Destroy()end)
+pcall(function()av.WindUI.DropdownGui:Destroy()end)
+pcall(function()av.WindUI.TooltipGui:Destroy()end)
+pcall(function()an.DisconnectAll()end)
+return
+end
+return aw:Destroy()
+end
+
 function aw.Close(C)
 if aw.Destroyed then
 return
@@ -14478,12 +14698,14 @@ end
 
 aw.UIElements.Main.Visible=false
 
-if aw.OpenButtonMain and not aw.Destroyed and not aw.IsPC and aw.IsOpenButtonEnabled then
+local _shouldShowOpenIcon=aw.IsMobile or aw.ShowOpenIconOnPC
+if aw.OpenButtonMain and not aw.Destroyed and _shouldShowOpenIcon and aw.IsOpenButtonEnabled then
 aw.OpenButtonMain:Visible(true)
 end
 end)
 
 function F.Destroy(G)
+RunKurooCleanup()
 task.spawn(function()
 if aw.OnDestroyCallback then
 task.spawn(function()
@@ -14499,10 +14721,10 @@ aw.Destroyed=true
 
 task.wait(0.4)
 
-av.WindUI.ScreenGui:Destroy()
-av.WindUI.NotificationGui:Destroy()
-av.WindUI.DropdownGui:Destroy()
-av.WindUI.TooltipGui:Destroy()
+pcall(function()av.WindUI.ScreenGui:Destroy()end)
+pcall(function()av.WindUI.NotificationGui:Destroy()end)
+pcall(function()av.WindUI.DropdownGui:Destroy()end)
+pcall(function()av.WindUI.TooltipGui:Destroy()end)
 
 an.DisconnectAll()
 
@@ -14632,7 +14854,7 @@ end)
 end
 
 an.AddSignal(af.InputBegan,function(C,F)
-if F then
+if F or aw._IsBindingToggleKey then
 return
 end
 
@@ -14938,39 +15160,257 @@ end
 local J=false
 
 aw:CreateTopbarButton("Close","x",function()
-if not J then
-if not aw.IgnoreAlerts then
-J=true
-
-aw:Dialog{
-
-Title="Close Window",
-Content="Do you want to close this window? You will not be able to open it again.",
-Buttons={
-{
-Title="Cancel",
-
-Callback=function()
-J=false
-end,
-Variant="Secondary",
-},
-{
-Title="Close Window",
-
-Callback=function()
-J=false
-aw:Destroy()
-end,
-Variant="Primary",
-},
-},
+if aw.Close then
+aw:Close()
+if not aw.IsMobile then
+local _keyLabel=aw.ToggleKey and aw.ToggleKey.Name or"K"
+av.WindUI:Notify{
+Title=aw.Title or"KurooUI",
+Content="UI disembunyikan - Tekan [".._keyLabel.."] untuk membuka kembali",
+Duration=2.5,
 }
-else
-aw:Destroy()
 end
 end
 end,(aw.Topbar.ButtonsType=="Default"and 999 or 997),nil,Color3.fromHex"#F4695F")
+
+if not aw.IsMobile then
+local _spOpen=false
+local _spFrame=ao("ScrollingFrame",{
+Name="KurooSettingsPage",
+Size=UDim2.new(1,0,1,0),
+BackgroundTransparency=1,
+ScrollBarThickness=0,
+CanvasSize=UDim2.new(0,0,0,0),
+AutomaticCanvasSize="Y",
+Visible=false,
+ZIndex=12,
+Parent=aw.UIElements.MainBar,
+},{
+ao("UIPadding",{
+PaddingTop=UDim.new(0,aw.UIPadding),
+PaddingBottom=UDim.new(0,aw.UIPadding),
+PaddingLeft=UDim.new(0,aw.UIPadding),
+PaddingRight=UDim.new(0,aw.UIPadding),
+}),
+ao("UIListLayout",{
+Padding=UDim.new(0,10),
+SortOrder="LayoutOrder",
+}),
+ao("Frame",{
+Name="Header",
+Size=UDim2.new(1,0,0,42),
+BackgroundTransparency=1,
+LayoutOrder=1,
+ZIndex=13,
+},{
+ao("TextLabel",{
+Text="UI SETTINGS",
+Size=UDim2.new(1,0,0,22),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=18,
+FontFace=Font.new(an.Font,Enum.FontWeight.Bold),
+TextColor3=Color3.fromHex"#FFFFFF",
+ZIndex=14,
+}),
+ao("TextLabel",{
+Text="Pengaturan KurooUI (khusus PC) â€” perubahan tersimpan otomatis",
+Size=UDim2.new(1,0,0,16),
+Position=UDim2.new(0,0,0,24),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=12,
+FontFace=Font.new(an.Font,Enum.FontWeight.Medium),
+TextColor3=Color3.fromHex"#E60012",
+ZIndex=14,
+}),
+}),
+ao("Frame",{
+Name="KeyCard",
+Size=UDim2.new(1,0,0,62),
+BackgroundColor3=Color3.fromHex"#16161B",
+BackgroundTransparency=0.08,
+LayoutOrder=2,
+ZIndex=13,
+},{
+ao("UICorner",{CornerRadius=UDim.new(0,aw.ElementConfig.UICorner)}),
+ao("UIStroke",{Thickness=1,Transparency=0.55,ApplyStrokeMode="Border",ThemeTag={Color="Outline"}}),
+ao("UIPadding",{
+PaddingLeft=UDim.new(0,14),
+PaddingRight=UDim.new(0,14),
+}),
+ao("TextLabel",{
+Text="Toggle UI Keybind",
+Size=UDim2.new(1,-96,0,20),
+Position=UDim2.new(0,0,0,12),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=15,
+FontFace=Font.new(an.Font,Enum.FontWeight.SemiBold),
+TextColor3=Color3.fromHex"#FFFFFF",
+ZIndex=14,
+}),
+ao("TextLabel",{
+Text="Klik tombol di kanan lalu tekan tombol keyboard baru",
+Size=UDim2.new(1,-96,0,16),
+Position=UDim2.new(0,0,0,34),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=12,
+FontFace=Font.new(an.Font,Enum.FontWeight.Medium),
+TextColor3=Color3.fromHex"#BDBDC7",
+ZIndex=14,
+}),
+ao("TextButton",{
+Name="KeyBtn",
+Size=UDim2.new(0,84,0,32),
+Position=UDim2.new(1,0,0.5,0),
+AnchorPoint=Vector2.new(1,0.5),
+BackgroundColor3=Color3.fromHex"#0D0D11",
+Text=aw.ToggleKey and aw.ToggleKey.Name or"K",
+TextSize=13,
+FontFace=Font.new(an.Font,Enum.FontWeight.Bold),
+TextColor3=Color3.fromHex"#FFFFFF",
+AutoButtonColor=false,
+ZIndex=14,
+},{
+ao("UICorner",{CornerRadius=UDim.new(0,6)}),
+ao("UIStroke",{Thickness=1.5,ApplyStrokeMode="Border",Color=Color3.fromHex"#E60012"}),
+}),
+}),
+ao("Frame",{
+Name="IconCard",
+Size=UDim2.new(1,0,0,62),
+BackgroundColor3=Color3.fromHex"#16161B",
+BackgroundTransparency=0.08,
+LayoutOrder=3,
+ZIndex=13,
+},{
+ao("UICorner",{CornerRadius=UDim.new(0,aw.ElementConfig.UICorner)}),
+ao("UIStroke",{Thickness=1,Transparency=0.55,ApplyStrokeMode="Border",ThemeTag={Color="Outline"}}),
+ao("UIPadding",{
+PaddingLeft=UDim.new(0,14),
+PaddingRight=UDim.new(0,14),
+}),
+ao("TextLabel",{
+Text="Floating Open Icon",
+Size=UDim2.new(1,-64,0,20),
+Position=UDim2.new(0,0,0,12),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=15,
+FontFace=Font.new(an.Font,Enum.FontWeight.SemiBold),
+TextColor3=Color3.fromHex"#FFFFFF",
+ZIndex=14,
+}),
+ao("TextLabel",{
+Name="Sub",
+Text=aw.ShowOpenIconOnPC and"Aktif â€” ikon bulat tampil saat UI disembunyikan (tersimpan)"or"Nonaktif â€” ikon bulat disembunyikan di PC (tersimpan)",
+Size=UDim2.new(1,-64,0,16),
+Position=UDim2.new(0,0,0,34),
+BackgroundTransparency=1,
+TextXAlignment="Left",
+TextSize=12,
+TextColor3=Color3.fromHex"#BDBDC7",
+FontFace=Font.new(an.Font,Enum.FontWeight.Medium),
+ZIndex=14,
+}),
+ao("TextButton",{
+Name="ToggleBtn",
+Size=UDim2.new(0,48,0,26),
+Position=UDim2.new(1,0,0.5,0),
+AnchorPoint=Vector2.new(1,0.5),
+BackgroundColor3=aw.ShowOpenIconOnPC and Color3.fromHex"#E60012"or Color3.fromHex"#27272F",
+Text="",
+AutoButtonColor=false,
+ZIndex=14,
+},{
+ao("UICorner",{CornerRadius=UDim.new(1,0)}),
+ao("UIStroke",{Thickness=1.5,ApplyStrokeMode="Border",Color=Color3.fromHex"#E60012",Transparency=0.25}),
+ao("Frame",{
+Name="Knob",
+Size=UDim2.new(0,20,0,20),
+Position=aw.ShowOpenIconOnPC and UDim2.new(1,-3,0.5,0)or UDim2.new(0,3,0.5,0),
+AnchorPoint=aw.ShowOpenIconOnPC and Vector2.new(1,0.5)or Vector2.new(0,0.5),
+BackgroundColor3=Color3.fromHex"#FFFFFF",
+ZIndex=15,
+},{
+ao("UICorner",{CornerRadius=UDim.new(1,0)}),
+}),
+}),
+}),
+})
+
+local _keyBtn=_spFrame.KeyCard.KeyBtn
+local _toggleBtn=_spFrame.IconCard.ToggleBtn
+local _subLbl=_spFrame.IconCard.Sub
+local _gearRef=d and d:FindFirstChild"UserIcon"and d.UserIcon:FindFirstChild"SettingsGear"
+
+function aw._CloseSettingsPage()
+if not _spOpen then return end
+_spOpen=false
+_spFrame.Visible=false
+if _gearRef then
+ap(_gearRef,0.12,{BackgroundColor3=Color3.fromHex"#1C1C22"}):Play()
+end
+end
+
+function aw._ToggleSettingsPopup()
+if _spOpen then
+aw:_CloseSettingsPage()
+if aw.TabModule and aw.TabModule.SelectedTab and aw.TabModule.Containers[aw.TabModule.SelectedTab]then
+aw.TabModule.Containers[aw.TabModule.SelectedTab].Visible=true
+end
+else
+_spOpen=true
+if aw.TabModule and aw.TabModule.Containers then
+for _,cnt in next,aw.TabModule.Containers do
+cnt.Visible=false
+end
+end
+_spFrame.Visible=true
+if _gearRef then
+ap(_gearRef,0.12,{BackgroundColor3=Color3.fromHex"#E60012"}):Play()
+end
+end
+end
+
+an.AddSignal(_keyBtn.MouseButton1Click,function()
+if aw._IsBindingToggleKey then return end
+aw._IsBindingToggleKey=true
+_keyBtn.Text="..."
+_keyBtn.BackgroundColor3=Color3.fromHex"#E60012"
+local _conn
+_conn=af.InputBegan:Connect(function(inp,gp)
+if inp.UserInputType==Enum.UserInputType.Keyboard and inp.KeyCode~=Enum.KeyCode.Unknown then
+if inp.KeyCode~=Enum.KeyCode.Escape then
+aw:SetToggleKey(inp.KeyCode)
+end
+_keyBtn.Text=aw.ToggleKey and aw.ToggleKey.Name or"K"
+_keyBtn.BackgroundColor3=Color3.fromHex"#0D0D11"
+if _conn then _conn:Disconnect()end
+task.defer(function()aw._IsBindingToggleKey=false end)
+end
+end)
+end)
+
+an.AddSignal(_toggleBtn.MouseButton1Click,function()
+aw.ShowOpenIconOnPC=not aw.ShowOpenIconOnPC
+_kSettings.ShowOpenIconOnPC=aw.ShowOpenIconOnPC
+SaveKurooSettings(_kSettings)
+_subLbl.Text=aw.ShowOpenIconOnPC and"Aktif â€” ikon bulat tampil saat UI disembunyikan (tersimpan)"or"Nonaktif â€” ikon bulat disembunyikan di PC (tersimpan)"
+ap(_toggleBtn,0.15,{
+BackgroundColor3=aw.ShowOpenIconOnPC and Color3.fromHex"#E60012"or Color3.fromHex"#27272F",
+}):Play()
+ap(_toggleBtn.Knob,0.15,{
+Position=aw.ShowOpenIconOnPC and UDim2.new(1,-3,0.5,0)or UDim2.new(0,3,0.5,0),
+AnchorPoint=aw.ShowOpenIconOnPC and Vector2.new(1,0.5)or Vector2.new(0,0.5),
+}):Play()
+if aw.OpenButtonMain then
+aw.OpenButtonMain:Visible(aw.Closed and aw.ShowOpenIconOnPC)
+end
+end)
+end
 
 function aw.Tag(L,M)
 if aw.UIElements.Main.Main.Topbar.Center.Visible==false then
@@ -15230,6 +15670,9 @@ UIScaleObj=nil,
 
 CreateWindow=nil,
 
+DefaultBackground="https://raw.githubusercontent.com/KurooNeko874/KurooUI_WindVersion/main/assets/backgrounds/KurooBijiluGwPelintir.jpg",
+DefaultOpenIcon="https://raw.githubusercontent.com/KurooNeko874/KurooUI_WindVersion/main/assets/icons/BijiLuGwPelintir-Photoroom.png",
+
 CurrentInput=nil,
 }
 
@@ -15301,7 +15744,7 @@ local au=a.load't'
 
 local av=protectgui or(syn and syn.protect_gui)or function()end
 
-local aw=gethui and gethui()or(al or ap:WaitForChild"PlayerGui")
+local aw=gethui and gethui()or(am:IsStudio()and ap:WaitForChild"PlayerGui"or(al or ap:WaitForChild"PlayerGui"))
 
 local ax=at("UIScale",{
 Scale=aa.UIScale,
@@ -15310,7 +15753,7 @@ Scale=aa.UIScale,
 aa.UIScaleObj=ax
 
 aa.ScreenGui=at("ScreenGui",{
-Name="WindUI",
+Name="KurooUI",
 Parent=aw,
 IgnoreGuiInset=true,
 ScreenInsets="None",
@@ -15338,17 +15781,17 @@ Name="ToolTips",
 })
 
 aa.NotificationGui=at("ScreenGui",{
-Name="WindUI/Notifications",
+Name="KurooUI/Notifications",
 Parent=aw,
 IgnoreGuiInset=true,
 })
 aa.DropdownGui=at("ScreenGui",{
-Name="WindUI/Dropdowns",
+Name="KurooUI/Dropdowns",
 Parent=aw,
 IgnoreGuiInset=true,
 })
 aa.TooltipGui=at("ScreenGui",{
-Name="WindUI/Tooltips",
+Name="KurooUI/Tooltips",
 Parent=aw,
 IgnoreGuiInset=true,
 })
@@ -15506,15 +15949,28 @@ aa.Themes=a.load'v'(aa,as)
 
 as.Themes=aa.Themes
 
-aa:SetTheme"Dark"
+aa:SetTheme"Persona5"
 aa:SetLanguage(as.Language)
 
 function aa.CreateWindow(az,aA)
+local _gEnv=(getgenv and getgenv())or _G
+if _gEnv.__KurooUI_ActiveInstance then
+pcall(function()
+if _gEnv.__KurooUI_ActiveInstance.Unload then
+_gEnv.__KurooUI_ActiveInstance:Unload(true)
+elseif _gEnv.__KurooUI_ActiveInstance.Destroy then
+_gEnv.__KurooUI_ActiveInstance:Destroy()
+end
+end)
+_gEnv.__KurooUI_ActiveInstance=nil
+aa.Window=nil
+end
+
 local aB=a.load'ae'
 
 if not am:IsStudio()and writefile then
-if not isfolder"WindUI"then
-makefolder"WindUI"
+if not isfolder"KurooUI"then
+makefolder"KurooUI"
 end
 if aA.Folder then
 makefolder(aA.Folder)
@@ -15534,7 +15990,7 @@ end
 
 local b=true
 
-local d=aa.Themes[aA.Theme or"Dark"]
+local d=aa.Themes[aA.Theme or"Persona5"]
 
 
 as.SetTheme(d)
@@ -15623,6 +16079,8 @@ local h=aB(aA)
 
 aa.Transparent=aA.Transparent
 aa.Window=h
+local _gEnv2=(getgenv and getgenv())or _G
+_gEnv2.__KurooUI_ActiveInstance=h
 
 if aA.Acrylic then
 au.init()
