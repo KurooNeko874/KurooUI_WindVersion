@@ -5371,7 +5371,49 @@ ad(am,0.12,{Scale=1}):Play()
 ad(an.TextButton,0.12,{BackgroundTransparency=1}):Play()
 end)
 
-local ao=ab.Drag(al)
+local _uis=ae(game:GetService"UserInputService")
+local _dragging=false
+local _dragInput=nil
+local _dragStart=nil
+local _startPos=nil
+local _canDrag=true
+ag._WasDragged=false
+
+ab.AddSignal(an.TextButton.InputBegan,function(inp)
+if not _canDrag then return end
+if inp.UserInputType==Enum.UserInputType.MouseButton1 or inp.UserInputType==Enum.UserInputType.Touch then
+_dragging=true
+_dragInput=inp
+_dragStart=inp.Position
+_startPos=al.Position
+ag._WasDragged=false
+inp.Changed:Connect(function()
+if inp.UserInputState==Enum.UserInputState.End then
+_dragging=false
+_dragInput=nil
+end
+end)
+end
+end)
+
+ab.AddSignal(_uis.InputChanged,function(inp)
+if _dragging and(inp.UserInputType==Enum.UserInputType.MouseMovement or inp.UserInputType==Enum.UserInputType.Touch)then
+local delta=inp.Position-_dragStart
+if delta.Magnitude>8 then
+ag._WasDragged=true
+end
+if ag._WasDragged then
+al.Position=UDim2.new(
+_startPos.X.Scale,
+_startPos.X.Offset+delta.X,
+_startPos.Y.Scale,
+_startPos.Y.Offset+delta.Y
+)
+end
+end
+end)
+
+local ao={Set=function(_,v)_canDrag=v~=false end}
 
 function ag.Visible(ap,aq)
 al.Visible=aq
@@ -13499,10 +13541,7 @@ Position=UDim2.new(1,-8,0.5,0),
 AnchorPoint=Vector2.new(1,0.5),
 BackgroundColor3=Color3.fromHex"#1C1C22",
 BackgroundTransparency=0.1,
-Text="âš™",
-TextSize=16,
-TextColor3=Color3.fromHex"#FFFFFF",
-FontFace=Font.new(an.Font,Enum.FontWeight.Bold),
+Text="",
 AutoButtonColor=false,
 ZIndex=10,
 },{
@@ -13517,6 +13556,14 @@ ThemeTag={
 Color="Outline",
 },
 }),
+(function()
+local _ic=an.Image("settings","settings",0,aw.Folder,"SettingsGearIcon",true,true,"Icon")
+_ic.Size=UDim2.new(0,16,0,16)
+_ic.Position=UDim2.new(0.5,0,0.5,0)
+_ic.AnchorPoint=Vector2.new(0.5,0.5)
+_ic.ZIndex=11
+return _ic
+end)(),
 })or nil,
 }),
 })
@@ -14847,8 +14894,10 @@ end
 
 if aw.OpenButtonMain and aw.OpenButtonMain.Button then
 an.AddSignal(aw.OpenButtonMain.Button.TextButton.MouseButton1Click,function()
-
-
+if aw.OpenButtonMain._WasDragged then
+aw.OpenButtonMain._WasDragged=false
+return
+end
 aw:Open()
 end)
 end
